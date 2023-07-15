@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.PhoneBookInfo" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <item name="colorPrimary">@color/color_primary_dark</item>
+        <item name="colorPrimaryVariant">@color/color_primary_variant</item>
+
+        <item name="colorOnSurface">@color/color_primary</item>
+        <item name="colorOnSecondaryContainer">@color/color_primary</item>
+
+
+
+<!--
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
+-->
+
+    </style>
+
+    <style name="Theme.PhoneBookInfo" parent="Base.Theme.PhoneBookInfo">
+
+
+    </style>
+</resources>

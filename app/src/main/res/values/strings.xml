@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PhoneBookInfo</string>
+    <string name="contacts_hint_name_or_phone_number">Name or Phone number</string>
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>

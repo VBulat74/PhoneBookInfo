@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@null"
+    android:backgroundTint="@null">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imview_contact_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_default_contact"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@id/linearlayout_contact_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edtext_contact_name" />
+
+    <TextView
+        android:id="@+id/edtext_contact_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imview_contact_photo"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Name contact" />
+
+    <TextView
+        android:id="@+id/edtext_contact_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imview_contact_photo"
+        app:layout_constraintTop_toBottomOf="@id/edtext_contact_name"
+        tools:text="Phone contact" />
+
+    <LinearLayout
+        android:id="@+id/linearlayout_contact_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imview_contact_photo"
+        app:layout_constraintTop_toBottomOf="@id/edtext_contact_phone">
+
+        <TextView
+            android:id="@+id/edtext_contact_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            tools:text="Contact info" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imbutton_more_contact"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_contact_more"
+        android:background="@null"
+        android:elevation="5dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edtext_contact_name"
+        app:layout_constraintBottom_toBottomOf="@id/linearlayout_contact_info"/>
+
+    <ImageButton
+        android:id="@+id/imbutton_call_contact"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_phone_calling"
+        android:background="@null"
+        android:elevation="5dp"
+        android:layout_marginEnd="3dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toStartOf="@id/imbutton_more_contact"
+        app:layout_constraintTop_toTopOf="@id/edtext_contact_name"
+        app:layout_constraintBottom_toBottomOf="@id/linearlayout_contact_info"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

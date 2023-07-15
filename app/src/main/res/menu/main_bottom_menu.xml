@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/contacts_book"
+        android:title="Contacts"
+        android:icon="@drawable/ic_bottom_menu_contacts"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/sim_cards"
+        android:title="SIM cards"
+        android:icon="@drawable/ic_bottom_menu_sim_cards"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_bottom_menu_settings"
+        app:showAsAction="ifRoom"/>
+
+
+</menu>
