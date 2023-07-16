@@ -25,6 +25,9 @@ data class ContactItem(
     @ColumnInfo(name = "phone_normalized")
     val phoneNormalized:String,
 
+    @ColumnInfo(name = "phone_type")
+    val phoneType:String,
+
     @ColumnInfo(name = "photo_thumbnail_uri")
     val photoThumbnailURI: String?,
 

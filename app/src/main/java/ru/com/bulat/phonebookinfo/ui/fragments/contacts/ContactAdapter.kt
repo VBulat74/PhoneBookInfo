@@ -1,5 +1,11 @@
 package ru.com.bulat.phonebookinfo.ui.fragments.contacts
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
+import android.graphics.Rect
 import android.provider.ContactsContract
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.com.bulat.phonebookinfo.R
 import ru.com.bulat.phonebookinfo.databinding.ContactsListItemBinding
 import ru.com.bulat.phonebookinfo.entities.ContactItem
+import ru.com.bulat.phonebookinfo.utilits.APP_ACTIVITY
 import ru.com.bulat.phonebookinfo.utilits.loadContactPhotoThumbnail
-import java.lang.Long.getLong
 
 
 class ContactAdapter(private val listener: Listener) :
@@ -23,7 +29,11 @@ class ContactAdapter(private val listener: Listener) :
 
         fun setData(contact: ContactItem, listener: Listener) = with(mBinding) {
             tviewContactName.text = contact.name
-            tviewContactPhone.text = contact.phone
+            tviewContactPhone.text = APP_ACTIVITY.getString(
+                R.string.contacts_phone_number,
+                contact.phoneType,
+                contact.phone
+            )
             tviewContactInfo.text = "Id: ${contact.rowID}"
 
             /*
@@ -40,7 +50,7 @@ class ContactAdapter(private val listener: Listener) :
             val photoURI = contact.photoThumbnailURI
             if (photoURI != null) {
                 loadContactPhotoThumbnail(contact.photoThumbnailURI)?.also { thumbnailBitmap ->
-                    qcbContactPhoto.setImageBitmap(thumbnailBitmap)
+                    qcbContactPhoto.setImageBitmap(getCroppedBitmap(thumbnailBitmap))
                 }
             }
 
@@ -49,13 +59,38 @@ class ContactAdapter(private val listener: Listener) :
 
             }
 
-            qcbContactPhoto.setOnClickListener {
-                listener.onClickItem(contact)
-            }
+//            qcbContactPhoto.setOnClickListener {
+//                listener.onClickItem(contact)
+//            }
 
             imbuttonCallContact.setOnClickListener {
 
             }
+        }
+
+        fun getCroppedBitmap(bitmap: Bitmap): Bitmap? {
+            val output = Bitmap.createBitmap(
+                bitmap.width,
+                bitmap.height, Bitmap.Config.ARGB_8888
+            )
+            val canvas = Canvas(output)
+            val color = -0xbdbdbe
+            val paint = Paint()
+            val rect = Rect(0, 0, bitmap.width, bitmap.height)
+            paint.isAntiAlias = true
+            canvas.drawARGB(0, 0, 0, 0)
+            paint.color = color
+            // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+            canvas.drawCircle(
+                (bitmap.width / 2).toFloat(), (bitmap.height / 2).toFloat(),
+                (
+                        bitmap.width / 2).toFloat(), paint
+            )
+            paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+            canvas.drawBitmap(bitmap, rect, rect, paint)
+            // Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
+            // return _bmp;
+            return output
         }
 
         companion object {
