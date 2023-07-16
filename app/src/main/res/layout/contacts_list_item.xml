@@ -8,15 +8,24 @@
     android:background="@null"
     android:backgroundTint="@null">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imview_contact_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <QuickContactBadge
+        android:id="@+id/qcb_contact_photo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/ic_default_contact"
-        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@id/linearlayout_contact_info"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tview_contact_name" />
+
+    <!--    <de.hdodenhof.circleimageview.CircleImageView-->
+    <!--        android:id="@+id/imview_contact_photo"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:src="@drawable/ic_default_contact"-->
+    <!--        android:clickable="true"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@id/linearlayout_contact_info"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="@id/tview_contact_name" />-->
 
     <TextView
         android:id="@+id/tview_contact_name"
@@ -27,7 +36,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imview_contact_photo"
+        app:layout_constraintStart_toEndOf="@id/qcb_contact_photo"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Name contact" />
 
@@ -39,7 +48,7 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imview_contact_photo"
+        app:layout_constraintStart_toEndOf="@id/qcb_contact_photo"
         app:layout_constraintTop_toBottomOf="@id/tview_contact_name"
         tools:text="Phone contact" />
 
@@ -50,7 +59,7 @@
         android:layout_marginStart="5dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imview_contact_photo"
+        app:layout_constraintStart_toEndOf="@id/qcb_contact_photo"
         app:layout_constraintTop_toBottomOf="@id/tview_contact_phone">
 
         <TextView
@@ -65,25 +74,25 @@
         android:id="@+id/imbutton_more_contact"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/ic_contact_more"
         android:background="@null"
-        android:elevation="5dp"
         android:clickable="true"
+        android:elevation="5dp"
+        android:src="@drawable/ic_contact_more"
+        app:layout_constraintBottom_toBottomOf="@id/linearlayout_contact_info"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tview_contact_name"
-        app:layout_constraintBottom_toBottomOf="@id/linearlayout_contact_info"/>
+        app:layout_constraintTop_toTopOf="@id/tview_contact_name" />
 
     <ImageButton
         android:id="@+id/imbutton_call_contact"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/ic_phone_calling"
-        android:background="@null"
-        android:elevation="5dp"
         android:layout_marginEnd="3dp"
+        android:background="@null"
         android:clickable="true"
+        android:elevation="5dp"
+        android:src="@drawable/ic_phone_calling"
+        app:layout_constraintBottom_toBottomOf="@id/linearlayout_contact_info"
         app:layout_constraintEnd_toStartOf="@id/imbutton_more_contact"
-        app:layout_constraintTop_toTopOf="@id/tview_contact_name"
-        app:layout_constraintBottom_toBottomOf="@id/linearlayout_contact_info"/>
+        app:layout_constraintTop_toTopOf="@id/tview_contact_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

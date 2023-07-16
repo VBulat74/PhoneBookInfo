@@ -16,9 +16,12 @@ interface Dao {
     suspend fun updateContact(contact:ContactItem)
 
     @Query("SELECT * FROM contact_item")
-    fun getAllNotes (): Flow<List<ContactItem>>
+    suspend fun getAllContactItemList (): List<ContactItem>
 
     @Query ("SELECT * FROM contact_item WHERE name LIKE :substring")
     suspend fun getContactItemList (substring: String): List<ContactItem>
+
+    @Query("DELETE FROM contact_item")
+    suspend fun clearContacts()
 
 }

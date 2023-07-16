@@ -1,5 +1,7 @@
 package ru.com.bulat.phonebookinfo.ui.fragments.contacts
 
+import android.provider.ContactsContract
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,23 +11,45 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.com.bulat.phonebookinfo.R
 import ru.com.bulat.phonebookinfo.databinding.ContactsListItemBinding
 import ru.com.bulat.phonebookinfo.entities.ContactItem
+import ru.com.bulat.phonebookinfo.utilits.loadContactPhotoThumbnail
+import java.lang.Long.getLong
 
 
-class ContactAdapter (private val listener:Listener) : ListAdapter <ContactItem, ContactAdapter.ItemHolder> (ItemComparator()) {
+class ContactAdapter(private val listener: Listener) :
+    ListAdapter<ContactItem, ContactAdapter.ItemHolder>(ItemComparator()) {
 
-    class ItemHolder (view: View) : RecyclerView.ViewHolder (view) {
+    class ItemHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val mBinding = ContactsListItemBinding.bind(view)
 
-        fun setData (contact: ContactItem, listener : Listener) = with(mBinding){
+        fun setData(contact: ContactItem, listener: Listener) = with(mBinding) {
             tviewContactName.text = contact.name
-            tviewContactPhone.text= contact.phone
-            tviewContactInfo.text= "Id: ${contact.id.toString()}"
+            tviewContactPhone.text = contact.phone
+            tviewContactInfo.text = "Id: ${contact.rowID}"
+
+            /*
+            * Generates a contact URI for the QuickContactBadge
+            */
+            ContactsContract.Contacts.getLookupUri(
+                contact.rowID,
+                contact.lookupKey,
+            ).also { contactUri ->
+                Log.d("AAA", "contactUri: $contactUri")
+                qcbContactPhoto.assignContactUri(contactUri)
+            }
+
+            val photoURI = contact.photoThumbnailURI
+            if (photoURI != null) {
+                loadContactPhotoThumbnail(contact.photoThumbnailURI)?.also { thumbnailBitmap ->
+                    qcbContactPhoto.setImageBitmap(thumbnailBitmap)
+                }
+            }
+
 
             itemView.setOnClickListener {
 
             }
 
-            imviewContactPhoto.setOnClickListener {
+            qcbContactPhoto.setOnClickListener {
                 listener.onClickItem(contact)
             }
 
@@ -33,11 +57,13 @@ class ContactAdapter (private val listener:Listener) : ListAdapter <ContactItem,
 
             }
         }
-        companion object{
-            fun create(parent:ViewGroup):ItemHolder{
+
+        companion object {
+            fun create(parent: ViewGroup): ItemHolder {
                 return ItemHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.contacts_list_item,parent,false))
+                        .inflate(R.layout.contacts_list_item, parent, false)
+                )
             }
         }
     }
@@ -62,8 +88,8 @@ class ContactAdapter (private val listener:Listener) : ListAdapter <ContactItem,
 
     }
 
-    interface Listener{
-        fun onClickItem(contact:ContactItem)
+    interface Listener {
+        fun onClickItem(contact: ContactItem)
     }
 
 

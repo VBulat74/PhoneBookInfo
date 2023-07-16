@@ -23,10 +23,11 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginEnd="5dp"
-        android:background="@null"
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:src="@drawable/ic_countacts_search_48"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="@id/edtext_find_contact"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/edtext_find_contact" />

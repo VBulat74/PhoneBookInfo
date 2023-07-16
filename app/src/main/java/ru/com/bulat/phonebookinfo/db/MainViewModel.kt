@@ -13,9 +13,24 @@ class MainViewModel (database: MainDataBase) : ViewModel() {
 
     val contactItems = MutableLiveData<List<ContactItem>>()
 
-    fun getContactItemList(substring: String) = viewModelScope.launch{
-        contactItems.postValue(dao.getContactItemList(substring))
+    fun insertContactItem (contactItem: ContactItem) = viewModelScope.launch {
+        dao.insertContact(contactItem)
     }
+
+
+    fun getContactItemList(substring: String)  = viewModelScope.launch {
+        contactItems.postValue(dao.getContactItemList(substring))
+        Log.d("AAA", "contactItems: ${contactItems.value.toString()}")
+    }
+
+    fun getAllContactItemList() = viewModelScope.launch{
+        contactItems.postValue(dao.getAllContactItemList())
+    }
+
+    fun clearContact () = viewModelScope.launch {
+        dao.clearContacts()
+    }
+
 
 
     class MainViewModelFactory(val database: MainDataBase): ViewModelProvider.Factory{

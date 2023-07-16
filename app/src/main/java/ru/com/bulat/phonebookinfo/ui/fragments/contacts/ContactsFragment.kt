@@ -1,6 +1,7 @@
 package ru.com.bulat.phonebookinfo.ui.fragments.contacts
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,18 +33,30 @@ class ContactsFragment : Fragment(), ContactAdapter.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRcView()
-        listContactItensObserver()
+        listContactItemsObserver()
+        initFields()
     }
 
-    private fun listContactItensObserver() {
+    private fun initFields() {
+        mBinding.imbuttonFindContacts.setOnClickListener {
+            val searchText = mBinding.edtextFindContact.text.toString()
+            Log.d("AAA", "Search: %$searchText%")
+            mainViewModel.getContactItemList("%$searchText%")
+        }
+    }
+
+    private fun listContactItemsObserver() {
         mainViewModel.contactItems.observe(viewLifecycleOwner) {listContactItems ->
             adapter.submitList(listContactItems)
         }
+        mainViewModel.getContactItemList("%%")
+        //mainViewModel.getAllContactItemList()
     }
 
     private fun initRcView() = with(mBinding) {
         rcViewContacts.layoutManager = LinearLayoutManager (activity)
         adapter = ContactAdapter(this@ContactsFragment)
+        rcViewContacts.adapter= adapter
     }
 
     override fun onClickItem(contact: ContactItem) {
