@@ -2,6 +2,7 @@ package ru.com.bulat.phonebookinfo
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -12,6 +13,7 @@ import ru.com.bulat.phonebookinfo.databinding.ActivityMainBinding
 import ru.com.bulat.phonebookinfo.db.MainViewModel
 import ru.com.bulat.phonebookinfo.db.initContactDataBase
 import ru.com.bulat.phonebookinfo.ui.fragments.contacts.ContactsFragment
+import ru.com.bulat.phonebookinfo.ui.fragments.settings.SettingsFragment
 import ru.com.bulat.phonebookinfo.utilits.APP_ACTIVITY
 import ru.com.bulat.phonebookinfo.utilits.READ_CONTACTS
 import ru.com.bulat.phonebookinfo.utilits.initContacts
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 initContacts(mainViewModel)
             }
+            Log.d("AAA", "Start bottomNavigation")
             setBottomNavListener()
             initFields()
         }
@@ -55,6 +58,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.contacts_book -> {
                     replaceFragment(ContactsFragment(),false)
                     currentMenuItemId = R.id.contacts_book
+                }
+
+                R.id.settings -> {
+                    replaceFragment(SettingsFragment(),false)
+                    currentMenuItemId = R.id.settings
                 }
             }
             true

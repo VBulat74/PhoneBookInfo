@@ -16,6 +16,7 @@ import java.io.IOException
 
 @SuppressLint("Range")
 fun initContacts(mainViewModel: MainViewModel) {
+    Log.d("AAA", "Start initContacts")
     if (checkPermission(READ_CONTACTS)) {
         val contactsList = ArrayList<ContactItem>()
 
@@ -118,6 +119,7 @@ fun initContacts(mainViewModel: MainViewModel) {
         cursorContact?.close()
         updateContactsDataBase(contactsList, mainViewModel)
     }
+    Log.d("AAA", "Stop initContacts")
 }
 
 /**

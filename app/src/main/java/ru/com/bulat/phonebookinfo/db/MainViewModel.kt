@@ -17,7 +17,6 @@ class MainViewModel (database: MainDataBase) : ViewModel() {
         dao.insertContact(contactItem)
     }
 
-
     fun getContactItemList(substring: String)  = viewModelScope.launch {
         contactItems.postValue(dao.getContactItemList(substring))
         Log.d("AAA", "contactItems: ${contactItems.value.toString()}")
@@ -30,8 +29,6 @@ class MainViewModel (database: MainDataBase) : ViewModel() {
     fun clearContact () = viewModelScope.launch {
         dao.clearContacts()
     }
-
-
 
     class MainViewModelFactory(val database: MainDataBase): ViewModelProvider.Factory{
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
