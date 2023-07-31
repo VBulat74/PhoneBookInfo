@@ -39,6 +39,7 @@ class SettingsViewModel (database: MainDataBase) : ViewModel() {
             CSVFormat.EXCEL
                 .withDelimiter(';')
                 .withRecordSeparator("\r\n")
+            //.withQuote(""")
         )
 
         for (csvRecord in csvParser) {
@@ -57,35 +58,6 @@ class SettingsViewModel (database: MainDataBase) : ViewModel() {
             Log.d("AAA", "Add $number_range")
             dao.insertNumberRange(number_range)
         }
-
-        /*val mInput = InputStreamReader(context.assets.open("number_range.csv"))
-        val reader = BufferedReader(mInput)
-
-        var line : String
-
-        while (withContext(Dispatchers.IO) {
-                reader.readLine()
-            }.also { line = it } != null) {
-            val row : List<String> = line.split(";")
-
-            val number_range = NumberRangeItem (
-                id = null,
-                codeDef = if (row[0].length == 4) {
-                    row[0].substring(1).toInt()
-                } else {
-                    row[0].toInt()
-                       },
-                number_begin = row[1].replace("\"","").toLong(),
-                number_end = row[2].replace("\"","").toLong(),
-                capacity = row[3].replace("\"","").toLong(),
-                provider = row[4],
-                region = row[5].replace("\"","").toInt(),
-                mnc = row[6].replace("\"","").toInt(),
-                route = row[7]
-            )
-            Log.d("AAA", "Add $number_range")
-            dao.insertNumberRange(number_range)
-        }*/
 
         numberRangeLiveData.postValue(Resource.Success(true))
     }
